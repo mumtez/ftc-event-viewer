@@ -219,7 +219,7 @@ function App() {
                 label="Event Code"
                 value={eventCode}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setEventCode(e.target.value)}
-                placeholder="Enter event code (e.g., 2023CAMA1)"
+                placeholder="Enter event code (e.g., 2024/USCHSLAOS)"
                 fullWidth
                 sx={{ 
                   '& .MuiOutlinedInput-root': {

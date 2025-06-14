@@ -1,46 +1,82 @@
-# Getting Started with Create React App
+# FTC Event Viewer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web application for viewing FIRST Tech Challenge event teams and their OPRs (Offensive Power Rating).
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- View teams participating in FTC events
+- Sort teams by number, name, or OPR
+- View detailed team information
+- Links to FTCScout and Orange Alliance
+- Responsive design
+- Docker support
 
-### `npm start`
+## Quick Start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Using Docker
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Pull the image:
+```bash
+docker pull mumtez/ftc-event-viewer:latest
+```
 
-### `npm test`
+2. Run the container:
+```bash
+docker run -d -p 80:80 mumtez/ftc-event-viewer:latest
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Using Docker Compose
 
-### `npm run build`
+1. Create a `docker-compose.yml` file:
+```yaml
+version: '3.8'
+services:
+  ftc-event-viewer:
+    image: mumtez/ftc-event-viewer:latest
+    container_name: ftc-event-viewer
+    expose:
+      - "80"
+    restart: always
+    networks:
+      - ftc-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+networks:
+  ftc-network:
+    driver: bridge
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Run with Docker Compose:
+```bash
+docker-compose up -d
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Development
 
-### `npm run eject`
+1. Install dependencies:
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. Start development server:
+```bash
+npm start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Build for production:
+```bash
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## API
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The application uses the FTCScout API to fetch event and team data.
 
-## Learn More
+## License
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+MIT License
