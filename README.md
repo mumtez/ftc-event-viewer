@@ -29,14 +29,32 @@ The application will be available at `http://localhost:3000`
 
 ### Using Docker Compose
 
-Alternatively, you can use Docker Compose:
+1. Create a `docker-compose.yml` file:
+```yaml
+version: '3.8'
 
+services:
+  ftc-event-viewer:
+    build: .
+    container_name: ftc-event-viewer
+    restart: unless-stopped
+    networks:
+      - npm_network
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  npm_network:
+    external: true
+```
+
+2. Run with Docker Compose:
 ```bash
-# Clone the repository
-git clone https://github.com/mumtez/ftc-event-viewer.git
-cd ftc-event-viewer
-
-# Start the application
 docker-compose up -d
 ```
 
