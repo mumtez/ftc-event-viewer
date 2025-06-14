@@ -28,7 +28,3 @@ yarn-error.log*
 .vscode/
 *.swp
 *.swo
-
-# Docker
-data/
-letsencrypt/
