@@ -1,0 +1,18 @@
+services:
+  ftc-event-viewer:
+    build: .
+    container_name: ftc-event-viewer
+    restart: unless-stopped
+    networks:
+      - npm_network
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  npm_network:
+    external: true 
