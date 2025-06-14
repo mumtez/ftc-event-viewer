@@ -35,7 +35,7 @@ services:
     image: mumtez/ftc-event-viewer:latest
     container_name: ftc-event-viewer
     expose:
-      - "80"
+      - "3000"
     restart: always
     networks:
       - ftc-network
