@@ -194,7 +194,7 @@ function App() {
         <Toolbar>
           <Box
             component="img"
-            src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/FIRST_Logo.svg/1200px-FIRST_Logo.svg.png"
+            src={`${process.env.PUBLIC_URL}/first-logo.svg`}
             alt="FIRST Logo"
             sx={{ height: 40, mr: 2 }}
           />
