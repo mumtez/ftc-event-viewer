@@ -17,12 +17,12 @@ A web application for viewing FIRST Tech Challenge event teams and their OPRs (O
 
 1. Pull the image:
 ```bash
-docker pull mumtez/ftc-event-viewer:latest
+docker pull andrewaburustum/ftc-event-viewer:latest
 ```
 
 2. Run the container:
 ```bash
-docker run -d -p 80:80 mumtez/ftc-event-viewer:latest
+docker run -d -p 80:80 andrewaburustum/ftc-event-viewer:latest
 ```
 
 ### Using Docker Compose
@@ -32,7 +32,7 @@ docker run -d -p 80:80 mumtez/ftc-event-viewer:latest
 version: '3.8'
 services:
   ftc-event-viewer:
-    image: mumtez/ftc-event-viewer:latest
+    image: andrewaburustum/ftc-event-viewer:latest
     container_name: ftc-event-viewer
     expose:
       - "3000"

@@ -25,6 +25,9 @@ export const getEventTeams = async (eventCode: string): Promise<{ eventCode: str
       throw new Error('Invalid response format from API');
     }
 
+    // Event codes look like "2024/USCHSLAOS"; the first part is the season
+    const season = eventCode.split('/')[0];
+
     // Get team details and OPR for each team
     const teams = await Promise.all(data.map(async (team: any) => {
       const teamNumber = team.teamNumber || team.number || 'Unknown';
@@ -34,8 +37,8 @@ export const getEventTeams = async (eventCode: string): Promise<{ eventCode: str
         const teamResponse = await fetch(`${API_BASE_URL}/teams/${teamNumber}`);
         const teamData = await teamResponse.json();
         
-        // Get team OPR
-        const statsResponse = await fetch(`${API_BASE_URL}/teams/${teamNumber}/quick-stats`);
+        // Get team OPR for the event's season (the API defaults to the current season otherwise)
+        const statsResponse = await fetch(`${API_BASE_URL}/teams/${teamNumber}/quick-stats?season=${season}`);
         const statsData = await statsResponse.json();
         
         return {
